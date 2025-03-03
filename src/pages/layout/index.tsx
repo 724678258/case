@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import "./index.less";
 import { Outlet } from "react-router-dom";
+import { getRouteMetaByRoutePath } from "@/router";
 const { Header, Content, Sider } = Layout;
 
 const HouTaiLayout = () => {
@@ -17,7 +18,10 @@ const HouTaiLayout = () => {
     navigator(e.key);
   };
   // 当前选中的菜单项
-  const selectedKeys = [location.pathname];
+  const routeMeta = getRouteMetaByRoutePath(location.pathname);
+  console.log(location.pathname, routeMeta);
+  const selectedKeys = [routeMeta?.menu || location.pathname];
+  console.log(selectedKeys);
 
   const items: MenuProps["items"] = [
     {
@@ -118,9 +122,7 @@ const HouTaiLayout = () => {
         <Content
           style={{
             margin: "20px",
-            padding: 24,
             minHeight: 280,
-            background: "#fff",
           }}
         >
           <Outlet></Outlet>

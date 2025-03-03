@@ -24,7 +24,7 @@ request.interceptors.request.use(
     // 2. 按照后端的格式要求做token拼接
     const token = getToken();
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Token = token;
     }
     return config;
   },
